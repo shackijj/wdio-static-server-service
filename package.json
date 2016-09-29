@@ -1,0 +1,45 @@
+{
+  "name": "wdio-static-server-service",
+  "description": "Creates a static server for WebdriverIO.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "LeadPages/wdio-static-server-service",
+  "license": "MIT",
+  "keywords": [
+    "webdriverio",
+    "wdio",
+    "wdio-service",
+    "static",
+    "server",
+    "tests",
+    "assets"
+  ],
+  "scripts": {
+    "prepublish": "npm prune && npm run build",
+    "build": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "fs-extra": "^0.30.0",
+    "log": "^1.4.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.16.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "cross-env": "^3.0.0",
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb-base": "^8.0.0",
+    "eslint-import-resolver-webpack": "^0.6.0",
+    "eslint-plugin-import": "^1.16.0",
+    "jasmine": "^2.5.2",
+    "source-map-support": "^0.4.3",
+    "webpack": "^1.13.2",
+    "webpack-merge": "^0.14.1"
+  },
+  "contributors": {
+    "Nicholas Dobie": "nick.dobie@ave81.com"
+  }
+}
