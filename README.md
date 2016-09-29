@@ -65,7 +65,7 @@ Type: `Number`
 
 Default: `4567`
 
-### staticServerLogs
+### staticServerLog
 
 Debugging logs, will print mount points and requests. When `staticServerLogs` is set to `true` it will print into the console. Otherwise a string will be treated as the log folder.
 
