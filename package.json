@@ -1,7 +1,7 @@
 {
   "name": "wdio-static-server-service",
   "description": "Creates a static server for WebdriverIO.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "LeadPages/wdio-static-server-service",
   "license": "MIT",
