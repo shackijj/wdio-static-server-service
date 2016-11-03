@@ -1,5 +1,7 @@
 # WDIO Static Server Service
 
+[![npm](https://img.shields.io/npm/v/wdio-static-server-service.svg?style=flat-square)](https://www.npmjs.com/package/wdio-static-server-service) [![npm](https://img.shields.io/npm/dm/wdio-static-server-service.svg?style=flat-square)](https://www.npmjs.com/package/wdio-static-server-service) [![npm](https://img.shields.io/npm/l/wdio-static-server-service.svg?style=flat-square)](https://www.npmjs.com/package/wdio-static-server-service)
+
 Some projects are front-end assets only and don't run on more than a static server. This service helps you to run a static file server during testing.
 
 ## Installation
