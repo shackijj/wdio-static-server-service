@@ -37,7 +37,6 @@ const baseConfig = {
 };
 
 switch (process.env.NODE_ENV) {
-  default:
   case 'development':
     module.exports = merge(baseConfig, {
       devtool: 'inline-source-map',
@@ -51,4 +50,6 @@ switch (process.env.NODE_ENV) {
       ],
     });
     break;
+  default:
+    module.exports = baseConfig;
 }
