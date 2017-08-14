@@ -78,6 +78,9 @@ Type: `Boolean` or `String`
 Array of middleware objects. Load and instatiate these in the config and pass them in for the static server to use.
 
 Type: `Array<Object>`
+Props:
+ - mount `{String}` - URL endpoint where middleware will be mounted.
+ - middleware `<Object>` - Middleware function callback
 
 Default: `[]`
 
@@ -86,9 +89,10 @@ Default: `[]`
  export.config = {
    const middleware = require('middleware-package');
    // ...
-   staticServerMiddleware: [
-     middleware(/* middleware options */),
-   ],
+   staticServerMiddleware: [{
+     mount: '/',
+     middleware: middleware(/* middleware options */),
+   }],
    // ...
  };
 ```

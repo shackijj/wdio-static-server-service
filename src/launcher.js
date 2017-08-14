@@ -40,7 +40,7 @@ export default class StaticServerLauncher {
     });
 
     middleware.forEach((ware) => {
-      this.server.use(ware);
+      this.server.use(ware.mount, ware.middleware);
     });
 
     return new Promise((resolve, reject) => {
