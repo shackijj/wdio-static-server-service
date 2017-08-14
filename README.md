@@ -52,7 +52,7 @@ Props:
  export.config = {
    // ...
    staticServerFolders: [
-     { mount: '/fixtures', path: './tests/fixtures' }
+     { mount: '/fixtures', path: './tests/fixtures' },
      { mount: '/dist', path: './dist' },
    ],
    // ...
@@ -72,6 +72,26 @@ Default: `4567`
 Debugging logs, will print mount points and requests. When `staticServerLogs` is set to `true` it will print into the console. Otherwise a string will be treated as the log folder.
 
 Type: `Boolean` or `String`
+
+### staticServerMiddleware
+
+Array of middleware objects. Load and instatiate these in the config and pass them in for the static server to use.
+
+Type: `Array<Object>`
+
+Default: `[]`
+
+``` javascript
+ // wdio.conf.js
+ export.config = {
+   const middleware = require('middleware-package');
+   // ...
+   staticServerMiddleware: [
+     middleware(/* middleware options */),
+   ],
+   // ...
+ };
+```
 
 ----
 
