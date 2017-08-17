@@ -7,8 +7,12 @@ import path from 'path';
 const DEFAULT_LOG_NAME = 'static-server.txt';
 
 export default class StaticServerLauncher {
-  onPrepare({ staticServerFolders: folders, staticServerLog: logging = false,
-      staticServerPort: port = 4567 }) {
+  onPrepare({
+    staticServerFolders: folders,
+    staticServerLog: logging = false,
+    staticServerPort: port = 4567,
+    staticServerMiddleware: middleware = []
+  }) {
     if (!folders) {
       return Promise.resolve();
     }
@@ -33,6 +37,10 @@ export default class StaticServerLauncher {
     (Array.isArray(folders) ? folders : [ folders ]).forEach((folder) => {
       this.log.debug('Mounting folder `%s` at `%s`', path.resolve(folder.path), folder.mount);
       this.server.use(folder.mount, express.static(folder.path));
+    });
+
+    middleware.forEach((ware) => {
+      this.server.use(ware.mount, ware.middleware);
     });
 
     return new Promise((resolve, reject) => {
