@@ -41,7 +41,7 @@ export default class StaticServerLauncher {
     });
 
     return new Promise((resolve, reject) => {
-      this.server.listen(this.port, (err) => {
+      this.httpServer = this.server.listen(this.port, (err) => {
         if (err) {
           reject(err);
         }
@@ -51,5 +51,7 @@ export default class StaticServerLauncher {
       });
     });
   }
-
+  onComplete() {
+    this.httpServer.close();
+  }
 }
