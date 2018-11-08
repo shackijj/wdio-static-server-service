@@ -11,7 +11,8 @@ export default class StaticServerLauncher {
     staticServerFolders: folders,
     staticServerLog: logging = false,
     staticServerPort: port = 4567,
-    staticServerMiddleware: middleware = []
+    staticServerMiddleware: middleware = [],
+    staticServerStaticOptions: staticOptions = {},
   }) {
     if (!folders) {
       return Promise.resolve();
@@ -36,7 +37,7 @@ export default class StaticServerLauncher {
 
     (Array.isArray(folders) ? folders : [ folders ]).forEach((folder) => {
       this.log.debug('Mounting folder `%s` at `%s`', path.resolve(folder.path), folder.mount);
-      this.server.use(folder.mount, express.static(folder.path));
+      this.server.use(folder.mount, express.static(folder.path, staticOptions));
     });
 
     middleware.forEach((ware) => {
