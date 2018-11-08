@@ -1,9 +1,9 @@
 {
-  "name": "wdio-static-server-service",
+  "name": "@shackijj/wdio-static-server-service",
   "description": "Creates a static server for WebdriverIO.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
-  "repository": "LeadPages/wdio-static-server-service",
+  "repository": "shackijj/wdio-static-server-service",
   "license": "MIT",
   "keywords": [
     "webdriverio",
@@ -39,7 +39,8 @@
     "webpack": "^1.13.2",
     "webpack-merge": "^0.14.1"
   },
-  "contributors": {
-    "Nicholas Dobie": "nick.dobie@ave81.com"
-  }
+  "contributors": [
+    "Nicholas Dobie",
+    "Kirill Shatskiy"
+  ]
 }
