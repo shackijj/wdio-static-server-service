@@ -8,11 +8,7 @@ const DEFAULT_LOG_NAME = 'static-server.txt';
 
 export default class StaticServerLauncher {
   onPrepare({
-    staticServerFolders: folders,
-    staticServerLog: logging = false,
-    staticServerPort: port = 4567,
-    staticServerMiddleware: middleware = [],
-    staticServerStaticOptions: staticOptions = {},
+    staticServer: {folders, logging = false, port = 4567, middleware = [], staticOptions = {}}
   }) {
     if (!folders) {
       return Promise.resolve();
