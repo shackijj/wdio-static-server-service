@@ -3,18 +3,22 @@ import fs from 'fs-extra';
 import Log from 'log';
 import morgan from 'morgan';
 import path from 'path';
+import http from 'http';
+import https from 'https';
 
 const DEFAULT_LOG_NAME = 'static-server.txt';
 
 export default class StaticServerLauncher {
   onPrepare({
-    staticServer: {folders, logging = false, port = 4567, middleware = [], staticOptions = {}}
+    staticServer: {folders, logging = false, port = 4567, middleware = [], staticOptions = {}},
+    useHttps = false,
+    certOptions = {}
   }) {
     if (!folders) {
       return Promise.resolve();
     }
 
-    this.server = express();
+    this.app = express();
     this.folders = folders;
     this.port = port;
 
@@ -26,22 +30,23 @@ export default class StaticServerLauncher {
         stream = fs.createWriteStream(file);
       }
       this.log = new Log('debug', stream);
-      this.server.use(morgan('tiny', { stream }));
+      this.app.use(morgan('tiny', { stream }));
     } else {
       this.log = new Log('emergency');
     }
 
     (Array.isArray(folders) ? folders : [ folders ]).forEach((folder) => {
       this.log.debug('Mounting folder `%s` at `%s`', path.resolve(folder.path), folder.mount);
-      this.server.use(folder.mount, express.static(folder.path, staticOptions));
+      this.app.use(folder.mount, express.static(folder.path, staticOptions));
     });
 
     middleware.forEach((ware) => {
-      this.server.use(ware.mount, ware.middleware);
+      this.app.use(ware.mount, ware.middleware);
     });
 
     return new Promise((resolve, reject) => {
-      this.httpServer = this.server.listen(this.port, (err) => {
+      const server = useHttps ? https.createServer(certOptions, this.app) : http.createServer(this.app);
+      this.server = server.listen(this.port, (err) => {
         if (err) {
           reject(err);
         }
@@ -52,6 +57,6 @@ export default class StaticServerLauncher {
     });
   }
   onComplete() {
-    this.httpServer.close();
+    this.server.close();
   }
 }
