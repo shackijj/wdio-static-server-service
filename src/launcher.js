@@ -45,11 +45,8 @@ export default class StaticServerLauncher {
     });
 
     return new Promise((resolve, reject) => {
-      this.app.listen = function () {
-        const server = useHttps ? https.createServer(certOptions, this) : http.createServer(this)
-        return server.listen.apply(server, arguments)
-      }
-      this.server = this.app.listen(this.port, (err) => {
+      const server = useHttps ? https.createServer(certOptions, this.app) : http.createServer(this.app);
+      this.server = server.listen(this.port, (err) => {
         if (err) {
           reject(err);
         }
